@@ -4,6 +4,6 @@ class HomeController
 {
     public static function index()
     {
-        require_once APP_ROOT . '/resources/view/Home/home.php';
+        require_once APP_ROOT . '/resources/view/home/home.php';
     }
 }
