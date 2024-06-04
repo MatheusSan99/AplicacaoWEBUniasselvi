@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Seminario\Mvc\Controller;
 
 use Seminario\Mvc\Helper\HtmlRendererTrait;
-use Seminario\Mvc\Repository\VideoRepository;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,7 +24,7 @@ class NewsListController implements RequestHandlerInterface
         $newsList = $this->newsRepository->all();
 
         return new Response(200, body: $this->renderTemplate(
-            'news-list',
+            'news-form',
             ['newsList' => $newsList]
         ));
     }

@@ -1,6 +1,9 @@
 <?php
+
+use Seminario\Mvc\Entity\News;
+
 require_once __DIR__ . '/inicio-html.php';
-/** @var \Seminario\Mvc\Entity\News[] $newsList */
+/** @var News[] $newsList */
 ?>
 
 <ul class="news__container">
