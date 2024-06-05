@@ -27,7 +27,7 @@ class NewNewsController implements RequestHandlerInterface
         if ($title === false) {
             $this->addErrorMessage('Título não informado');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/nova-noticia'
             ]);
         }
 
@@ -36,7 +36,7 @@ class NewNewsController implements RequestHandlerInterface
         if ($content === false) {
             $this->addErrorMessage('Conteúdo não informado');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/nova-noticia'
             ]);
         }
 
@@ -45,7 +45,7 @@ class NewNewsController implements RequestHandlerInterface
         if ($author === false) {
             $this->addErrorMessage('Autor não informado');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/nova-noticia'
             ]);
         }
 
@@ -56,12 +56,12 @@ class NewNewsController implements RequestHandlerInterface
         if ($success === false) {
             $this->addErrorMessage('Erro ao cadastrar a notícia');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/nova-noticia'
             ]);
         }
 
         return new Response(302, [
-            'Location' => '/'
+            'Location' => '/nova-noticia'
         ]);
 
     }

@@ -3,17 +3,12 @@
 
 <body class="login-page sidebar-collapse">
   <div class="page-header clear-filter" filter-color="orange">
-    <div class="page-header-image" style="background-image:url(../assets/img/login.jpg)"></div>
+    <div class="page-header-image"></div>
     <div class="content">
       <div class="container">
         <div class="col-md-4 ml-auto mr-auto">
           <div class="card card-login card-plain">
             <form class="form" method="post">
-              <div class="card-header text-center">
-                <div class="logo-container">
-                  <img src="../assets/img/now-logo.png" alt="">
-                </div>
-              </div>
               <div class="card-body">
                 <div class="input-group no-border input-lg">
                   <div class="input-group-prepend">

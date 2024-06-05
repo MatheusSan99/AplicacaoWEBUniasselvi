@@ -27,7 +27,7 @@ class EditNewsController implements RequestHandlerInterface
         if ($id === false || $id === null) {
             $this->addErrorMessage('ID inválido');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/editar-noticia'
             ]);
         }
 
@@ -36,14 +36,14 @@ class EditNewsController implements RequestHandlerInterface
         if ($content === false) {
             $this->addErrorMessage('Conteúdo inválido');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/editar-noticia'
             ]);
         }
         $title = filter_var($requestBody['title']);
         if ($title === false) {
             $this->addErrorMessage('Título não informado');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/editar-noticia'
             ]);
         }
 
@@ -51,7 +51,7 @@ class EditNewsController implements RequestHandlerInterface
         if ($author === false) {
             $this->addErrorMessage('Autor não informado');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/editar-noticia'
             ]);
         }
 
@@ -63,12 +63,12 @@ class EditNewsController implements RequestHandlerInterface
         if ($success === false) {
             $this->addErrorMessage('Erro ao atualizar o notícia');
             return new Response(302, [
-                'Location' => '/'
+                'Location' => '/editar-noticia'
             ]);
         }
 
         return new Response(302, [
-            'Location' => '/'
+            'Location' => '/editar-noticia'
         ]);
     }
 }

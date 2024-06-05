@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 use Seminario\Mvc\Controller\Error404Controller;
 
+date_default_timezone_set('America/Sao_Paulo');
+
 require_once __DIR__ . '/../vendor/autoload.php';
 $routes = require_once __DIR__ . '/../config/routes.php';
 /** @var \Psr\Container\ContainerInterface $diContainer */
 $diContainer = require_once __DIR__ . '/../config/dependencies.php';
 
 require_once __DIR__ . "../../setupdb.php";
+require_once __DIR__ . "../../errorHandler.php";
 
 $pathInfo = $_SERVER['PATH_INFO'] ?? '/';
 $httpMethod = $_SERVER['REQUEST_METHOD'];

@@ -48,6 +48,6 @@ class LoginController implements RequestHandlerInterface
         }
 
         $_SESSION['logado'] = true;
-        return new Response(302, ['Location' => '/']);
+        return new Response(302, ['Location' => '/noticia-json']);
     }
 }

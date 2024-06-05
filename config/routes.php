@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+unset($_SESSION['operacaoPrincipal']);
+
 return [
     'GET|/' => \Seminario\Mvc\Controller\NewsListController::class,
     'GET|/nova-noticia' => \Seminario\Mvc\Controller\NewsListController::class,
@@ -12,6 +14,6 @@ return [
     'GET|/login' => \Seminario\Mvc\Controller\LoginFormController::class,
     'POST|/login' => \Seminario\Mvc\Controller\LoginController::class,
     'GET|/logout' => \Seminario\Mvc\Controller\LogoutController::class,
-    'GET|/noticia-json' => \Seminario\Mvc\Controller\JsonNewsListController::class,
+    'GET|/noticia-json' => \Seminario\Mvc\Controller\NewJsonNewsController::class,
     'POST|/noticias' => \Seminario\Mvc\Controller\NewJsonNewsController::class,
 ];

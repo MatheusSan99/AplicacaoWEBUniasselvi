@@ -21,6 +21,7 @@ class NewJsonNewsController implements RequestHandlerInterface
     {
         $request = $request->getBody()->getContents();
         $newsData = json_decode($request, true);
+
         $news = new News(
             $newsData['title'],
             $newsData['content'],

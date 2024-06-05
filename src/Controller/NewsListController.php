@@ -23,6 +23,8 @@ class NewsListController implements RequestHandlerInterface
     {
         $newsList = $this->newsRepository->all();
 
+        $_SESSION['operacaoPrincipal'] = "nova-noticia";
+
         return new Response(200, body: $this->renderTemplate(
             'news-form',
             ['newsList' => $newsList]

@@ -44,8 +44,8 @@ class News
         return $this->author;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): string
     {
-        return $this->date;
+        return $this->date->format('d/m/Y H:i:s');
     }
 }

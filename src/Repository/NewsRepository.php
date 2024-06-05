@@ -77,6 +77,8 @@ class NewsRepository
 
     private function hydrateNews(array $newsList): News
     {
+        $newsList['date'] = new \DateTime($newsList['date']);
+        
         $news = new News($newsList['title'], $newsList['content'], $newsList['author'], $newsList['date']);
 
         $news->setId($newsList['id']);

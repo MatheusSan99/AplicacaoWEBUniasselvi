@@ -50,9 +50,12 @@
 
             <?php if (!empty($_SESSION['logado'])) : ?>
             <ul class="nav">
+                <?php if ($_SESSION['operacaoPrincipal'] != "nova-noticia") : ?>
                 <li class="nav-item">
                     <a class="nav-link active" href="/nova-noticia">Nova Noticia</a>
                 </li>
+                <?php endif; ?>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Sair</a>
                 </li>
