@@ -67,6 +67,8 @@ class CreateNewsController
             ]);
         }
 
+        $this->addSuccessMessage('Notícia cadastrada com sucesso');
+        
         return new Response(302, [
             'Location' => '/nova-noticia'
         ]);

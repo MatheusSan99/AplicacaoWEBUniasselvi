@@ -94,6 +94,8 @@ class EditNewsController
             ]);
         }
 
+        $this->addSuccessMessage('Notícia atualizada com sucesso');
+
         return new Response(302, [
             'Location' => '/editar-noticia'
         ]);
