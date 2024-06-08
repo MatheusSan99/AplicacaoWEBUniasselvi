@@ -101,3 +101,67 @@ O diagrama de casos de uso descreve as interações entre os usuários e o siste
 
 https://trilhaaprendizagem.uniasselvi.com.br/ADS102_seminario_interdisciplinar_implementacao/
 
+## Colaborando no Projeto
+
+Trabalhando com Branches Individuais
+Para garantir que todos os membros da equipe possam trabalhar simultaneamente no projeto sem conflitos, cada um deve criar e trabalhar em sua própria branch. Aqui estão os passos para configurar isso:
+
+Atualize o repositório local:
+
+```
+git pull origin main
+```
+
+Crie sua branch a partir da main:
+
+```
+git checkout -b sua-branch
+```
+
+Substitua sua-branch por um nome que identifique o que você está trabalhando, por exemplo, criar-noticia, editar-noticia, autenticacao-usuario.
+
+Faça suas alterações e commit:
+
+```
+git add .
+git commit -m "Descrição das mudanças"
+```
+
+Envie sua branch para o repositório remoto:
+
+```
+git push origin sua-branch
+```
+
+Abra um Pull Request:
+
+Vá até o repositório no GitHub.
+Clique em "Compare & pull request".
+Descreva suas mudanças e solicite a revisão.
+
+Padrão de Projeto Relacionado aos Casos de Uso
+
+Para este projeto, iremos utilizar o padrão MVC (Model-View-Controller). Este padrão ajuda a organizar a aplicação em três componentes principais:
+
+**Model:**
+
+Representa a lógica de dados da aplicação. Aqui você pode definir classes que representam as notícias, usuários, etc.
+Exemplo: Classe Noticia que contém atributos como título, imagem, conteúdo e categoria.
+
+**View:**
+
+Responsável pela interface do usuário. Exibe os dados do model para o usuário e envia comandos do usuário para o controller.
+Exemplo: Páginas HTML/PHP que listam notícias, formulários de criação e edição.
+
+**Controller:**
+
+Controla a lógica da aplicação. Recebe a entrada do usuário a partir da view, processa a lógica necessária e interage com o model.
+Exemplo: Classe NoticiaController que gerencia ações como criar, editar, listar e remover notícias.
+
+**Fluxo de Interação:**
+
+Quando o usuário acessa a página de listagem de notícias, o Controller chama o Model para obter os dados das notícias e passa esses dados para a View.
+Ao criar ou editar uma notícia, a View envia os dados para o Controller, que então atualiza o Model e redireciona o usuário de volta para a lista de notícias.
+
+Esse padrão facilita a manutenção e a escalabilidade do código, além de separar claramente as responsabilidades dentro da aplicação.
+
