@@ -8,7 +8,11 @@ use Seminario\Mvc\Entity\News;
         <main class="container mt-5">
             <div class="card card-body text-black">
                 <form class="form" method="post" novalidate>
+                    <?php if ($_SESSION['operacaoPrincipal'] === 'nova-noticia') : ?>
                     <h2 class="title text-center">Envie uma notícia!</h2>
+                    <?php else : ?>
+                    <h2 class="title text-center">Edite a notícia!</h2>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label for="title" class="form-label">Título</label>
                         <input type="text" name="title" value="<?= $news?->getTitle() ?? ''; ?>" class="form-control"

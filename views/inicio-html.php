@@ -57,6 +57,10 @@
                 <?php endif; ?>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/">Lista de Noticias</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/logout">Sair</a>
                 </li>
             </ul>

@@ -6,21 +6,28 @@ namespace Seminario\Mvc\Controller;
 
 use Seminario\Mvc\Entity\News;
 use Seminario\Mvc\Helper\FlashMessageTrait;
+use Seminario\Mvc\Helper\HtmlRendererTrait;
 use Seminario\Mvc\Repository\NewsRepository;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class NewNewsController implements RequestHandlerInterface
+class CreateNewsController
 {
     use FlashMessageTrait;
+    use HtmlRendererTrait;
 
     public function __construct(private NewsRepository $NewsRepository)
     {
+        $_SESSION['operacaoPrincipal'] = 'nova-noticia';
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function createNews(ServerRequestInterface $request): ResponseInterface
+    {
+        return new Response(200, body: $this->renderTemplate('news-form'));
+    }
+
+    public function confirmCreation(ServerRequestInterface $request): ResponseInterface
     {
         $requestBody = $request->getParsedBody();
         $title = filter_var($requestBody['title']);

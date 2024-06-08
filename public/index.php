@@ -27,11 +27,16 @@ if (!array_key_exists('logado', $_SESSION) && !$isLoginRoute) {
 
 $key = "$httpMethod|$pathInfo";
 if (array_key_exists($key, $routes)) {
-    $controllerClass = $routes["$httpMethod|$pathInfo"];
-
+    [$controllerClass, $method] = $routes[$key];
     $controller = $diContainer->get($controllerClass);
+
+    if (!method_exists($controller, $method)) {
+        $controller = new Error404Controller();
+        $method = 'handle';
+    }
 } else {
     $controller = new Error404Controller();
+    $method = 'handle';
 }
 
 $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
@@ -45,8 +50,11 @@ $creator = new \Nyholm\Psr7Server\ServerRequestCreator(
 
 $request = $creator->fromGlobals();
 
-/** @var \Psr\Http\Server\RequestHandlerInterface $controller */
-$response = $controller->handle($request);
+if (method_exists($controller, $method)) {
+    $response = $controller->$method($request);
+} else {
+    $response = (new Error404Controller())->handle($request);
+}
 
 http_response_code($response->getStatusCode());
 foreach ($response->getHeaders() as $name => $values) {

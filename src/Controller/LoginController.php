@@ -8,9 +8,8 @@ use Seminario\Mvc\Helper\FlashMessageTrait;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class LoginController implements RequestHandlerInterface
+class LoginController
 {
     use FlashMessageTrait;
 
@@ -22,7 +21,7 @@ class LoginController implements RequestHandlerInterface
         $this->pdo = new \PDO("sqlite:$dbPath");
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function login(ServerRequestInterface $request): ResponseInterface
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password');
@@ -48,6 +47,6 @@ class LoginController implements RequestHandlerInterface
         }
 
         $_SESSION['logado'] = true;
-        return new Response(302, ['Location' => '/noticia-json']);
+        return new Response(302, ['Location' => '/news-list']);
     }
 }

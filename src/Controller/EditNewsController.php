@@ -4,23 +4,50 @@ declare(strict_types=1);
 
 namespace Seminario\Mvc\Controller;
 
+use Seminario\Mvc\Helper\HtmlRendererTrait;
 use Seminario\Mvc\Entity\News;
 use Seminario\Mvc\Helper\FlashMessageTrait;
 use Seminario\Mvc\Repository\NewsRepository;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class EditNewsController implements RequestHandlerInterface
+class EditNewsController
 {
     use FlashMessageTrait;
+    use HtmlRendererTrait;
 
     public function __construct(private NewsRepository $newsRepository)
     {
+        $_SESSION['operacaoPrincipal'] = 'editar-noticia';
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function editNews(ServerRequestInterface $request): ResponseInterface
+    {
+        $queryParams = $request->getQueryParams();
+        $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
+        if ($id === false || $id === null) {
+            $this->addErrorMessage('ID inválido');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
+        $News = $this->newsRepository->find($id);
+        if ($News === null) {
+            $this->addErrorMessage('Notícia não encontrada');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
+        return new Response(200, body: $this->renderTemplate(
+            'news-form',
+            ['news' => $News]
+        ));
+    }
+
+    public function confirmEdit(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);

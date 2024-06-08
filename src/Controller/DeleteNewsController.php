@@ -8,10 +8,9 @@ use Seminario\Mvc\Helper\FlashMessageTrait;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Seminario\Mvc\Repository\NewsRepository;
 
-class DeleteNewsController implements RequestHandlerInterface
+class DeleteNewsController 
 {
     use FlashMessageTrait;
 
@@ -19,7 +18,7 @@ class DeleteNewsController implements RequestHandlerInterface
     {
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function delete(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);

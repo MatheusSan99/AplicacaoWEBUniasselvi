@@ -4,23 +4,59 @@ require_once __DIR__ . '/inicio-html.php';
 
 use Seminario\Mvc\Entity\News;
 
-require_once __DIR__ . '/inicio-html.php';
 /** @var News[] $newsList */
 ?>
 
-<ul class="news__container">
-    <?php foreach ($newsList as $news): ?>
-        <li class="news__item">
-            <h3><?= $news->getTitle(); ?></h3>
-            <p><?= $news->getContent(); ?></p>
-            <p><?= $news->getAuthor(); ?></p>
-            <p><?= $news->getDate(); ?></p>
-            <div class="acoes-news">
-                <a href="/editar-news?id=<?= $news->getId(); ?>">Editar</a>
-                <a href="/remover-news?id=<?= $news->getId(); ?>">Excluir</a>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Lista de Notícias</h4>
+            <p class="card-category">Aqui estão as notícias mais recentes</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Título
+                  </th>
+                  <th>
+                    Conteúdo
+                  </th>
+                  <th>
+                    Autor
+                  </th>
+                  <th>
+                    Data
+                  </th>
+                  <th>
+                    Ações
+                  </th>
+                </thead>
+                <tbody>
+                  <?php foreach ($newsList as $news): ?>
+                    <tr>
+                      <td><?= $news->getTitle(); ?></td>
+                      <td><?= $news->getContent(); ?></td>
+                      <td><?= $news->getAuthor(); ?></td>
+                      <td><?= $news->getDate(); ?></td>
+                      <td>
+                        <a href="/editar-noticia?id=<?= $news->getId(); ?>" class="btn btn-info btn-sm">Editar</a>
+                        <a href="/remover-noticia?id=<?= $news->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
             </div>
-        </li>
-    <?php endforeach; ?>
-</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<?php require_once __DIR__ . '/fim-html.php';
+<?php require_once __DIR__ . '/fim-html.php'; ?>
