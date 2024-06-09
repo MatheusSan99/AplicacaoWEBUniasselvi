@@ -52,12 +52,9 @@
 
             <?php if (!empty($_SESSION['logado'])): ?>
                 <ul class="nav">
-                    <?php if ($_SESSION['operacaoPrincipal'] != "nova-noticia"): ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/nova-noticia">Nova Noticia</a>
-                        </li>
-                    <?php endif; ?>
-
+                    <li class="nav-item" id="newNoticeNavBar">
+                        <a class="nav-link active" href="/nova-noticia">Nova Noticia</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/">Lista de Noticias</a>
                     </li>
@@ -69,23 +66,22 @@
             <?php endif; ?>
         </nav>
 
-
     </header>
 
     <?php if (isset($_SESSION['error_message']) || isset($_SESSION['success_message'])): ?>
-    <div class="notification-container">
-        <?php if (isset($_SESSION['error_message'])): ?>
-            <div id="errorAlert" class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-                <?= htmlspecialchars($_SESSION['error_message'], ENT_QUOTES, 'UTF-8'); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['success_message'])): ?>
-            <div id="successAlert" class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
-                <?= htmlspecialchars($_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-        <?php unset($_SESSION['error_message'], $_SESSION['success_message']); ?>
-    </div>
-<?php endif; ?>
+        <div class="notification-container">
+            <?php if (isset($_SESSION['error_message'])): ?>
+                <div id="errorAlert" class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+                    <?= htmlspecialchars($_SESSION['error_message'], ENT_QUOTES, 'UTF-8'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['success_message'])): ?>
+                <div id="successAlert" class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
+                    <?= htmlspecialchars($_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <?php unset($_SESSION['error_message'], $_SESSION['success_message']); ?>
+        </div>
+    <?php endif; ?>

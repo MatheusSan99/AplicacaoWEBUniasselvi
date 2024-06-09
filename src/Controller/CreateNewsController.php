@@ -19,7 +19,7 @@ class CreateNewsController
 
     public function __construct(private NewsRepository $NewsRepository)
     {
-        $_SESSION['operacaoPrincipal'] = 'nova-noticia';
+        $_SESSION['operation'] = 'create-news';
     }
 
     public function createNews(ServerRequestInterface $request): ResponseInterface
@@ -70,7 +70,7 @@ class CreateNewsController
         $this->addSuccessMessage('Notícia cadastrada com sucesso');
         
         return new Response(302, [
-            'Location' => '/nova-noticia'
+            'Location' => '/'
         ]);
 
     }

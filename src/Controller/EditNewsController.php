@@ -19,7 +19,7 @@ class EditNewsController
 
     public function __construct(private NewsRepository $newsRepository)
     {
-        $_SESSION['operacaoPrincipal'] = 'editar-noticia';
+        $_SESSION['operation'] = 'edit-news';
     }
 
     public function editNews(ServerRequestInterface $request): ResponseInterface

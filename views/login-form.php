@@ -9,6 +9,7 @@
         <div class="col-md-4 ml-auto mr-auto">
           <div class="card card-login card-plain">
             <form class="form" method="post">
+                <input type="hidden" name="operation" id="operation" value="login">
               <div class="card-body">
                 <div class="input-group no-border input-lg">
                   <div class="input-group-prepend">
@@ -31,7 +32,7 @@
                 <button class="btn btn-primary btn-round btn-lg btn-block" type="submit" value="Entrar">Login</button>
                 <div class="pull-mid">
                   <h6>
-                    <button href="/createAccount" class="link">Create Account</button>
+                    <a href="/create-account" class="link">Create Account</a>
                   </h6>
                 </div>
             </form>

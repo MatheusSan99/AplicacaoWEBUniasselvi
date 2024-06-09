@@ -19,8 +19,9 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 session_start();
 session_regenerate_id();
 $isLoginRoute = $pathInfo === '/login';
+$isCreateAccountRoute = $pathInfo === '/create-account';
 
-if (!array_key_exists('logado', $_SESSION) && !$isLoginRoute) {
+if (!array_key_exists('logado', $_SESSION) && !$isLoginRoute && !$isCreateAccountRoute) {
     header('Location: /login');
     return;
 }

@@ -12,6 +12,7 @@ use Seminario\Mvc\Entity\News;
     <main class="container mt-5">
       <div class="card card-body text-black">
         <h2 class="title text-center">Lista de Notícias</h2>
+        <input type="hidden" name="operation" id="operation" value="news-list">
         <p class="card-category text-center">Aqui estão as notícias mais recentes</p>
         <div class="table-responsive">
           <table class="table">

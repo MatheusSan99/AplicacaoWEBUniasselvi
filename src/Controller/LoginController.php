@@ -47,6 +47,10 @@ class LoginController
         }
 
         $_SESSION['logado'] = true;
-        return new Response(302, ['Location' => '/news-list']);
+        $_SESSION['usuario'] = $userData['name'];
+
+        return new Response(302, ['Location' => '/']);
     }
+
+
 }

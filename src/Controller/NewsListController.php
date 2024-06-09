@@ -18,7 +18,6 @@ class NewsListController
 
     public function __construct(private NewsRepository $newsRepository)
     {
-        $_SESSION['operacaoPrincipal'] = 'listar-noticias';
     }
 
     public function listNews(ServerRequestInterface $request) : ResponseInterface
