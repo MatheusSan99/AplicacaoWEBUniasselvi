@@ -2,7 +2,18 @@
 
 define('APP_ROOT',  __DIR__);
 
-$errorLogPath = APP_ROOT . '/logs/error.log';
+$logDirectory = APP_ROOT . '/logs';
+$errorLogPath = $logDirectory . '/error.log';
+
+echo "APP_ROOT: " . APP_ROOT . PHP_EOL;
+
+if(!is_dir($logDirectory)){
+    mkdir($logDirectory, 0777, true);
+}
+
+if(!file_exists($errorLogPath)){
+    touch($errorLogPath);
+}
 
 function errorHandler($severity, $message, $file, $line) {
     global $errorLogPath;
@@ -19,3 +30,4 @@ function exceptionHandler($exception) {
 }
 
 set_exception_handler('exceptionHandler');
+

@@ -9,14 +9,17 @@ class News
     public readonly string $title;
     public readonly string $content;
     public readonly string $author;
+    public readonly string $category;
+    
     public readonly \DateTime $date;
 
-    public function __construct(string $title, string $content, string $author, \DateTime $date)
+    public function __construct(string $title, string $content, string $author, \DateTime $date, string $category)
     {
         $this->title = $title;
         $this->content = $content;
         $this->author = $author;
         $this->date = $date;
+        $this->category = $category;
     }
 
     public function setId(int $id): void
@@ -42,6 +45,11 @@ class News
     public function getAuthor(): string
     {
         return $this->author;
+    }
+
+    public function getCategory(): string
+    {
+        return $this->category;
     }
 
     public function getDate(): string
