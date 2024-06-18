@@ -15,12 +15,13 @@ class NewsRepository
 
     public function add(News $news): bool
     {
-        $sql = 'INSERT INTO news (title, content, author, date) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO news (title, content, author, date, category) VALUES (?, ?, ?, ?, ?)';
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $news->getTitle());
         $statement->bindValue(2, $news->getContent());
         $statement->bindValue(3, $news->getAuthor());
         $statement->bindValue(4, $news->getDate());
+        $statement->bindValue(5, $news->getCategory());
 
         $result = $statement->execute();
         $id = $this->pdo->lastInsertId();
@@ -41,13 +42,14 @@ class NewsRepository
 
     public function update(News $news): bool
     {
-        $sql = 'UPDATE news SET title = ?, content = ?, author = ?, date = ? WHERE id = ?';
+        $sql = 'UPDATE news SET title = ?, content = ?, author = ?, date = ?, category = ? WHERE id = ?';
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $news->getTitle());
         $statement->bindValue(2, $news->getContent());
         $statement->bindValue(3, $news->getAuthor());
         $statement->bindValue(4, $news->getDate());
         $statement->bindValue(5, $news->getId());
+        $statement->bindValue(6, $news->getCategory());
 
         return $statement->execute();
     }
@@ -77,9 +79,18 @@ class NewsRepository
 
     private function hydrateNews(array $newsList): News
     {
-        $newsList['date'] = new \DateTime($newsList['date']);
+        $dateString = \DateTime::createFromFormat('d/m/Y H:i:s', $newsList['date']);
+        if (!$dateString) {
+            throw new \Exception("Failed to parse date string '{$newsList['date']}'");
+        }
+        $category = $newsList['category'] ?? 'Uncategorized';
         
-        $news = new News($newsList['title'], $newsList['content'], $newsList['author'], $newsList['date']);
+        $news = new News($newsList['title'],
+        $newsList['content'], 
+        $newsList['author'],
+        $dateString,
+        $category
+    );
 
         $news->setId($newsList['id']);
 
