@@ -22,7 +22,7 @@ use Seminario\Mvc\Entity\News;
                 <th>Conteúdo</th>
                 <th>Autor</th>
                 <th>Data</th>
-                <th>Ações</th>
+                <th>Categoria</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +32,7 @@ use Seminario\Mvc\Entity\News;
                   <td><?= htmlspecialchars($news->getContent(), ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?= htmlspecialchars($news->getAuthor(), ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?= htmlspecialchars($news->getDate(), ENT_QUOTES, 'UTF-8'); ?></td>
+                  <td><?= htmlspecialchars($news->getCategory(), ENT_QUOTES, 'UTF-8'); ?></td>
                   <td>
                     <a href="/editar-noticia?id=<?= $news->getId(); ?>" class="btn btn-info btn-round btn-sm">Editar</a>
                     <a href="/remover-noticia?id=<?= $news->getId(); ?>" class="btn btn-danger btn-round btn-sm">Excluir</a>
