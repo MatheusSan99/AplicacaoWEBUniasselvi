@@ -5,6 +5,8 @@ declare(strict_types=1);
 return [
     'GET|/' => [\Seminario\Mvc\Controller\NewsListController::class, 'listNews'],
 
+    'GET|/visualizar-noticia' => [\Seminario\Mvc\Controller\NewsVisualizationController::class, 'visualizeNews'],
+
     'GET|/nova-noticia' => [\Seminario\Mvc\Controller\CreateNewsController::class, 'createNews'],
     'POST|/nova-noticia' => [\Seminario\Mvc\Controller\CreateNewsController::class, 'confirmCreation'],
 

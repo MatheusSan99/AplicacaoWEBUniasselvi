@@ -8,7 +8,6 @@ use Seminario\Mvc\Helper\HtmlRendererTrait;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Seminario\Mvc\Entity\News;
 use Seminario\Mvc\Repository\NewsRepository;
 

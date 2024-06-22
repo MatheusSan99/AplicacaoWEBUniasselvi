@@ -18,6 +18,7 @@ use Seminario\Mvc\Entity\News;
           <table class="table">
             <thead class="text-primary">
               <tr>
+                <th>Visualizar Notícia</th>
                 <th>Título</th>
                 <th>Conteúdo</th>
                 <th>Autor</th>
@@ -29,6 +30,10 @@ use Seminario\Mvc\Entity\News;
             <tbody>
               <?php foreach ($newsList as $news): ?>
                 <tr>
+                  <td>
+                    <a href="visualizar-noticia?id=<?= $news->getId(); ?>" class="btn btn-info btn-round btn-sm">Ler Notícia
+                    </a>
+                  </td>
                   <td><?= htmlspecialchars($news->getTitle(), ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?= htmlspecialchars($news->getContent(), ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?= htmlspecialchars($news->getAuthor(), ENT_QUOTES, 'UTF-8'); ?></td>
