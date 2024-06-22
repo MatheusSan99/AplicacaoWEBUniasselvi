@@ -22,22 +22,22 @@ Uma vez que o servidor esteja em execução, você pode acessar a aplicação em
 
 1. Página de Listagem de Notícias:
 
-    - Exibe uma lista de notícias com título, imagem e um breve resumo.
+    - Exibe uma lista de notícias com título, categoria e um breve resumo.
     - Usuários podem clicar em uma notícia para ver os detalhes completos.
 
 2. Criação de Notícias:
 
     - Usuários autenticados podem criar novas notícias.
-    - O formulário de criação inclui campos para título, imagem, conteúdo e categoria da notícia.
+    - O formulário de criação inclui campos para título, conteúdo e categoria da notícia.
 
 3. Edição de Notícias:
 
-    - Usuários autenticados podem editar notícias existentes.
-    - O formulário de edição permite atualizar o título, imagem, conteúdo e categoria da notícia.
+    - Usuários admin autenticados podem editar notícias existentes.
+    - O formulário de edição permite atualizar o título, conteúdo e categoria da notícia.
 
 4. Remoção de Notícias:
 
-    - Usuários autenticados podem remover notícias.
+    - Usuários admin autenticados podem remover notícias.
 
 5. Autenticação de Usuário:
 
@@ -146,7 +146,7 @@ Para este projeto, iremos utilizar o padrão MVC (Model-View-Controller). Este p
 **Model:**
 
 Representa a lógica de dados da aplicação. Aqui você pode definir classes que representam as notícias, usuários, etc.
-Exemplo: Classe Noticia que contém atributos como título, imagem, conteúdo e categoria.
+Exemplo: Classe Noticia que contém atributos como título, autor, conteúdo e categoria.
 
 **View:**
 
