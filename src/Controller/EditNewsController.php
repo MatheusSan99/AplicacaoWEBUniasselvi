@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Seminario\Mvc\Controller;
 
+use Seminario\Mvc\Helper\FormErrorHandlerTrait;
 use Seminario\Mvc\Helper\HtmlRendererTrait;
 use Seminario\Mvc\Entity\News;
 use Seminario\Mvc\Helper\FlashMessageTrait;
@@ -16,6 +17,7 @@ class EditNewsController
 {
     use FlashMessageTrait;
     use HtmlRendererTrait;
+    use FormErrorHandlerTrait;
 
     public function __construct(private NewsRepository $newsRepository)
     {
@@ -26,6 +28,7 @@ class EditNewsController
     {
         $queryParams = $request->getQueryParams();
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
+
         if ($id === false || $id === null) {
             $this->addErrorMessage('ID inválido');
             return new Response(302, [
@@ -50,39 +53,28 @@ class EditNewsController
     public function confirmEdit(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
-        $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
-        if ($id === false || $id === null) {
-            $this->addErrorMessage('ID inválido');
-            return new Response(302, [
-                'Location' => '/editar-noticia'
-            ]);
-        }
-
         $requestBody = $request->getParsedBody();
-        $content = filter_var($requestBody['content'], FILTER_VALIDATE_URL);
-        if ($content === false) {
-            $this->addErrorMessage('Conteúdo inválido');
+
+        $id = $this->validateInt(intval($queryParams['id']), 'ID');
+
+        $content = $this->validateString($requestBody['content'], 'Conteúdo');
+
+        $title = $this->validateString($requestBody['title'], 'Título');
+
+        $author = $this->validateString($requestBody['author'], 'Autor');
+
+        $category = $this->validateString($requestBody['category'], 'Categoria');
+
+        if (count($this->errors) > 0) {
+            $this->addErrorsToList();
+
             return new Response(302, [
-                'Location' => '/editar-noticia'
-            ]);
-        }
-        $title = filter_var($requestBody['title']);
-        if ($title === false) {
-            $this->addErrorMessage('Título não informado');
-            return new Response(302, [
-                'Location' => '/editar-noticia'
+                'Location' => '/editar-noticia?id=' . $id
             ]);
         }
 
-        $author = filter_var($requestBody['author']);
-        if ($author === false) {
-            $this->addErrorMessage('Autor não informado');
-            return new Response(302, [
-                'Location' => '/editar-noticia'
-            ]);
-        }
+        $News = new News($title, $content, $author, new \DateTime(), $category);
 
-        $News = new News($title, $content, $author, new \DateTime());
         $News->setId($id);
 
         $success = $this->newsRepository->update($News);
@@ -90,14 +82,15 @@ class EditNewsController
         if ($success === false) {
             $this->addErrorMessage('Erro ao atualizar o notícia');
             return new Response(302, [
-                'Location' => '/editar-noticia'
+                'Location' => '/editar-noticia?id=' . $id
             ]);
         }
 
         $this->addSuccessMessage('Notícia atualizada com sucesso');
 
         return new Response(302, [
-            'Location' => '/editar-noticia'
+            'Location' => '/'
         ]);
     }
+
 }

@@ -71,10 +71,14 @@
     <?php if (isset($_SESSION['error_message']) || isset($_SESSION['success_message'])): ?>
         <div class="notification-container">
             <?php if (isset($_SESSION['error_message'])): ?>
-                <div id="errorAlert" class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-                    <?= htmlspecialchars($_SESSION['error_message'], ENT_QUOTES, 'UTF-8'); ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+                        <ul>
+                            <?php foreach ($_SESSION['error_message'] as $error): ?>
+                                <li><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
             <?php endif; ?>
             <?php if (isset($_SESSION['success_message'])): ?>
                 <div id="successAlert" class="alert alert-success alert-dismissible fade show custom-alert" role="alert">

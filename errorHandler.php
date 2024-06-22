@@ -5,8 +5,6 @@ define('APP_ROOT',  __DIR__);
 $logDirectory = APP_ROOT . '/logs';
 $errorLogPath = $logDirectory . '/error.log';
 
-echo "APP_ROOT: " . APP_ROOT . PHP_EOL;
-
 if(!is_dir($logDirectory)){
     mkdir($logDirectory, 0777, true);
 }

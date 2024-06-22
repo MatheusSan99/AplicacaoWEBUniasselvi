@@ -8,7 +8,7 @@ trait FlashMessageTrait
 {
     private function addErrorMessage(string $errorMessage): void
     {
-        $_SESSION['error_message'] = $errorMessage;
+        $_SESSION['error_message'][] = $errorMessage;
     }
 
     private function addSuccessMessage(string $successMessage): void

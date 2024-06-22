@@ -29,7 +29,7 @@ use Seminario\Mvc\Entity\News;
                     </div>
                     <div class="form-group">
                         <label for="author" class="form-label">Autor</label>
-                        <input type="text" name="author" value="<?= $news?->getAuthor() ?? ''; ?>" class="form-control" required placeholder="Digite o autor" id="author">
+                        <input type="text" name="author" value="<?=$_SESSION['usuario']?>" class="form-control" required readonly id="author">
                         <div class="invalid-feedback">
                             Por favor, insira o autor.
                         </div>
@@ -41,11 +41,11 @@ use Seminario\Mvc\Entity\News;
                                 <option value="esportes" <?= isset($news) && $news->getCategory() === 'esportes' ? 'selected' : ''; ?>>Esportes</option>
                                 <option value="tecnologia" <?= isset($news) && $news->getCategory() === 'tecnologia' ? 'selected' : ''; ?>>Tecnologia</option>
                                 <option value="entretenimento" <?= isset($news) && $news->getCategory() === 'entretenimento' ? 'selected' : ''; ?>>Entretenimento</option>
-                                <option value="Saude" <?= isset($news) && $news->getCategory() === 'saude' ? 'selected' : ''; ?>>Saúde</option>
+                                <option value="saude" <?= isset($news) && $news->getCategory() === 'saude' ? 'selected' : ''; ?>>Saúde</option>
                                 <option value="viagem" <?= isset($news) && $news->getCategory() === 'viagem' ? 'selected' : ''; ?>>Viagens</option>
                             </select>
                             <div class="invalid-feedback">
-                                Por favor, selecione uma categoria.alte
+                                Por favor, selecione uma categoria
                             </div>
                         </div>
                         

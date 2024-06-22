@@ -20,7 +20,8 @@ $createNewsTable = '
         title TEXT NOT NULL,
         content TEXT NOT NULL,
         author TEXT NOT NULL,
-        date TEXT NOT NULL
+        date TEXT NOT NULL,
+        category TEXT NOT NULL
     );
 ';
 

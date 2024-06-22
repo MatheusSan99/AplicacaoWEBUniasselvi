@@ -48,8 +48,8 @@ class NewsRepository
         $statement->bindValue(2, $news->getContent());
         $statement->bindValue(3, $news->getAuthor());
         $statement->bindValue(4, $news->getDate());
-        $statement->bindValue(5, $news->getId());
-        $statement->bindValue(6, $news->getCategory());
+        $statement->bindValue(5, $news->getCategory());
+        $statement->bindValue(6, $news->getId());
 
         return $statement->execute();
     }
@@ -71,7 +71,7 @@ class NewsRepository
     public function find(int $id)
     {
         $statement = $this->pdo->prepare('SELECT * FROM news WHERE id = ?;');
-        $statement->bindValue(1, $id, \PDO::PARAM_INT);
+        $statement->bindValue(1, $id, PDO::PARAM_INT);
         $statement->execute();
 
         return $this->hydrateNews($statement->fetch(\PDO::FETCH_ASSOC));

@@ -6,6 +6,7 @@ namespace Seminario\Mvc\Controller;
 
 use Seminario\Mvc\Entity\News;
 use Seminario\Mvc\Helper\FlashMessageTrait;
+use Seminario\Mvc\Helper\FormErrorHandlerTrait;
 use Seminario\Mvc\Helper\HtmlRendererTrait;
 use Seminario\Mvc\Repository\NewsRepository;
 use Nyholm\Psr7\Response;
@@ -16,6 +17,7 @@ class CreateNewsController
 {
     use FlashMessageTrait;
     use HtmlRendererTrait;
+    use FormErrorHandlerTrait;
 
     public function __construct(private NewsRepository $NewsRepository)
     {
@@ -30,33 +32,26 @@ class CreateNewsController
     public function confirmCreation(ServerRequestInterface $request): ResponseInterface
     {
         $requestBody = $request->getParsedBody();
-        $title = filter_var($requestBody['title']);
-        if ($title === false) {
-            $this->addErrorMessage('Título não informado');
-            return new Response(302, [
-                'Location' => '/nova-noticia'
-            ]);
-        }
+
+        $title = $this->validateString($requestBody['title'], 'Título');
+
+        $content = $this->validateString($requestBody['content'], 'Conteúdo');
+
+        $author = $this->validateString($requestBody['author'], 'Autor');
+
+        $category = $this->validateString($requestBody['category'], 'Categoria');
 
         $content = filter_var($requestBody['content']);
 
-        if ($content === false) {
-            $this->addErrorMessage('Conteúdo não informado');
+        if (count($this->errors) > 0) {
+            $this->addErrorsToList();
+
             return new Response(302, [
                 'Location' => '/nova-noticia'
             ]);
         }
 
-        $author = filter_var($requestBody['author']);
-
-        if ($author === false) {
-            $this->addErrorMessage('Autor não informado');
-            return new Response(302, [
-                'Location' => '/nova-noticia'
-            ]);
-        }
-
-        $News = new News($title, $content, $author, new \DateTime());
+        $News = new News($title, $content, $author, new \DateTime(), $category);
 
         $success = $this->NewsRepository->add($News);
 

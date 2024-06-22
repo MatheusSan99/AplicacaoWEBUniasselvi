@@ -66,7 +66,7 @@ function addAlertMsg(type, msg) {
         alert.classList.remove('show');
         alert.classList.add('fade');
         setTimeout(() => alert.remove(), 500);
-    }, 4000);
+    }, 8000);
 }
 
 function validateRegisterForm() {

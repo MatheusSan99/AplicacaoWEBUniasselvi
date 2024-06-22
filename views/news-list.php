@@ -23,6 +23,7 @@ use Seminario\Mvc\Entity\News;
                 <th>Autor</th>
                 <th>Data</th>
                 <th>Categoria</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
