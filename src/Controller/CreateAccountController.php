@@ -37,7 +37,7 @@ class CreateAccountController
         $dbPath = __DIR__ . '/../../banco.sqlite';
         $pdo = new \PDO("sqlite:$dbPath");
 
-        $statement = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
+        $statement = $pdo->prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, "user")');
         $statement->bindValue(1, $name);
         $statement->bindValue(2, $email);
         $statement->bindValue(3, $passwordHash);

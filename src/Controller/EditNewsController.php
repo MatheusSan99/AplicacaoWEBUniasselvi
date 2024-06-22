@@ -37,6 +37,14 @@ class EditNewsController
         }
 
         $News = $this->newsRepository->find($id);
+
+        if ($News->getAuthor() !== $_SESSION['usuario'] || $_SESSION['role'] !== 'admin') {
+            $this->addErrorMessage('Você não tem permissão para editar esta notícia');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
         if ($News === null) {
             $this->addErrorMessage('Notícia não encontrada');
             return new Response(302, [
@@ -62,6 +70,13 @@ class EditNewsController
         $title = $this->validateString($requestBody['title'], 'Título');
 
         $author = $this->validateString($requestBody['author'], 'Autor');
+
+        if ($author !== $_SESSION['usuario'] || $_SESSION['role'] !== 'admin') {
+            $this->addErrorMessage('Você não tem permissão para editar esta notícia');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
 
         $category = $this->validateString($requestBody['category'], 'Categoria');
 

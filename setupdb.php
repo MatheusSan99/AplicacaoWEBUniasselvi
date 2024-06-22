@@ -10,7 +10,8 @@ $createUsersTable = '
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        role TEXT NOT NULL
     );
 ';
 
@@ -42,7 +43,7 @@ if ($statement->fetchAll()) {
 
 $password = password_hash('123456', PASSWORD_ARGON2ID);
 
-$inserirUsuarioPadrao = 'INSERT INTO users (name, email, password) VALUES ("Administrador", "admin@gmail.com", ?);';
+$inserirUsuarioPadrao = 'INSERT INTO users (name, email, password, role) VALUES ("Administrador", "admin@gmail.com", ?, "admin");';
 
 $statement = $pdo->prepare($inserirUsuarioPadrao);
 

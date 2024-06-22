@@ -48,6 +48,7 @@ class LoginController
 
         $_SESSION['logado'] = true;
         $_SESSION['usuario'] = $userData['name'];
+        $_SESSION['role'] = $userData['role'];
 
         return new Response(302, ['Location' => '/']);
     }

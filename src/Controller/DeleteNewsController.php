@@ -21,6 +21,14 @@ class DeleteNewsController
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
+
+        if ($_SESSION['role'] !== 'admin') {
+            $this->addErrorMessage('Você não tem permissão para excluir esta notícia');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
         if ($id === null || $id === false) {
             $this->addErrorMessage('ID inválido');
