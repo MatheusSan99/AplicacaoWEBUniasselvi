@@ -15,13 +15,14 @@ class NewsRepository
 
     public function add(News $news): bool
     {
-        $sql = 'INSERT INTO news (title, content, author, date, category) VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO news (title, content, author, date, category, image) VALUES (?, ?, ?, ?, ?, ?)';
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $news->getTitle());
         $statement->bindValue(2, $news->getContent());
         $statement->bindValue(3, $news->getAuthor());
         $statement->bindValue(4, $news->getDate());
         $statement->bindValue(5, $news->getCategory());
+        $statement->bindValue(6, $news->getImage());
 
         $result = $statement->execute();
         $id = $this->pdo->lastInsertId();
@@ -42,14 +43,27 @@ class NewsRepository
 
     public function update(News $news): bool
     {
-        $sql = 'UPDATE news SET title = ?, content = ?, author = ?, date = ?, category = ? WHERE id = ?';
+        $idNumber = !empty($news->getImage()) ? 7 : 6;
+
+        $sql = 'UPDATE news SET title = ?, content = ?, author = ?, date = ?, category = ?';
+
+        if ($news->getImage() !== null) {
+            $sql .= ', image = ?';
+        }
+
+        $sql .= ' WHERE id = ?';
+
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $news->getTitle());
         $statement->bindValue(2, $news->getContent());
         $statement->bindValue(3, $news->getAuthor());
         $statement->bindValue(4, $news->getDate());
         $statement->bindValue(5, $news->getCategory());
-        $statement->bindValue(6, $news->getId());
+        $statement->bindValue($idNumber, $news->getId());
+
+        if ($news->getImage() !== null) {
+            $statement->bindValue(6, $news->getImage());
+        }
 
         return $statement->execute();
     }
@@ -89,11 +103,21 @@ class NewsRepository
         $newsList['content'], 
         $newsList['author'],
         $dateString,
-        $category
+        $category,
+        $newsList['image']
     );
 
         $news->setId($newsList['id']);
 
         return $news;
+    }
+
+    public function removeImage(int $id): bool
+    {
+        $sql = 'UPDATE news SET image = NULL WHERE id = ?';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $id);
+
+        return $statement->execute();
     }
 }

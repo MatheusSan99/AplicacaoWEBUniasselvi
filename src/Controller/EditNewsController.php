@@ -71,6 +71,15 @@ class EditNewsController
 
         $author = $this->validateString($requestBody['author'], 'Autor');
 
+        $image = $request->getUploadedFiles()['image'];
+
+        if ($image != null) {
+            $imageContent = $image->getStream()->getContents();
+            $imageContent = base64_encode($imageContent);
+        } else {
+            $imageContent = null;
+        }
+
         if ($author !== $_SESSION['usuario']) {
             $this->addErrorMessage('Você não tem permissão para editar esta notícia');
             return new Response(302, [
@@ -88,7 +97,7 @@ class EditNewsController
             ]);
         }
 
-        $News = new News($title, $content, $author, new \DateTime(), $category);
+        $News = new News($title, $content, $author, new \DateTime(), $category, $imageContent);
 
         $News->setId($id);
 

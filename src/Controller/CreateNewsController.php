@@ -41,7 +41,17 @@ class CreateNewsController
 
         $category = $this->validateString($requestBody['category'], 'Categoria');
 
+        $image = $request->getUploadedFiles()['image'] ?? null;
+
         $content = filter_var($requestBody['content']);
+
+        if ($image != null) {
+            $imageContent = $image->getStream()->getContents();
+
+            $imageContent = base64_encode($imageContent);   
+        } else {
+            $imageContent = null;
+        }
 
         if (count($this->errors) > 0) {
             $this->addErrorsToList();
@@ -51,7 +61,7 @@ class CreateNewsController
             ]);
         }
 
-        $News = new News($title, $content, $author, new \DateTime(), $category);
+        $News = new News($title, $content, $author, new \DateTime(), $category, $imageContent);
 
         $success = $this->NewsRepository->add($News);
 

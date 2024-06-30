@@ -22,7 +22,8 @@ $createNewsTable = '
         content TEXT NOT NULL,
         author TEXT NOT NULL,
         date TEXT NOT NULL,
-        category TEXT NOT NULL
+        category TEXT NOT NULL,
+        image BLOB
     );
 ';
 

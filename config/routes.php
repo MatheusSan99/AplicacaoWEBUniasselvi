@@ -9,6 +9,8 @@ return [
 
     'GET|/nova-noticia' => [\Seminario\Mvc\Controller\CreateNewsController::class, 'createNews'],
     'POST|/nova-noticia' => [\Seminario\Mvc\Controller\CreateNewsController::class, 'confirmCreation'],
+    'POST|/remover-imagem' => [\Seminario\Mvc\Controller\DeleteNewsController::class, 'removeImage'],
+
 
     'GET|/editar-noticia' => [\Seminario\Mvc\Controller\EditNewsController::class, 'editNews'],
     'POST|/editar-noticia' => [\Seminario\Mvc\Controller\EditNewsController::class, 'confirmEdit'],

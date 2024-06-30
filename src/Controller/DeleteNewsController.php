@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Seminario\Mvc\Repository\NewsRepository;
 
-class DeleteNewsController 
+class  DeleteNewsController 
 {
     use FlashMessageTrait;
 
@@ -21,13 +21,6 @@ class DeleteNewsController
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
-
-        if ($_SESSION['role'] !== 'admin') {
-            $this->addErrorMessage('Você não tem permissão para excluir esta notícia');
-            return new Response(302, [
-                'Location' => '/'
-            ]);
-        }
 
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
         if ($id === null || $id === false) {
@@ -48,7 +41,35 @@ class DeleteNewsController
         $this->addSuccessMessage('Notícia removida com sucesso');
         
         return new Response(302, [
-            'Location' => '/'
+            'Location' => '/editar-noticia?id=' . $id
         ]);
     }
+
+    public function removeImage(ServerRequestInterface $request)
+    {
+        $id = filter_var($request->getParsedBody()['newsId'], FILTER_VALIDATE_INT);
+
+        if ($id === null || $id === false) {
+            $this->addErrorMessage('ID inválido');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
+        $success = $this->newsRepository->removeImage($id);
+
+        if ($success === false) {
+            $this->addErrorMessage('Erro ao remover imagem');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
+
+        $this->addSuccessMessage('Imagem removida com sucesso');
+
+        return new Response(302, [
+            'Location' => '/editar-noticia?id=' . $id
+        ]);
+    }
+
 }

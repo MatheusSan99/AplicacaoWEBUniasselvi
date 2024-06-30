@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {""
+document.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
     const errorAlert = document.getElementById('errorAlert');
     const successAlert = document.getElementById('successAlert');
@@ -30,6 +30,16 @@ document.addEventListener('DOMContentLoaded', (event) => {""
         manipulateNewNoticeNavBarText();
 
         manipulateTitleFormNews();
+
+        if (operation.value === 'edit-news') {
+            $(function() {
+                $('.pop').on('click', function() {
+                    $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                    $('#imagemodal').modal('show');   
+                });     
+            });
+            
+        }
     }
 });
 
@@ -87,3 +97,11 @@ function validateRegisterForm() {
 
     return true;
 }
+
+    function openModalImage(imageBase64) {
+        var modal = document.getElementById('imagemModal');
+        var modalImage = modal.querySelector('.modal-body img');
+        modalImage.src = "data:image/jpeg;base64," + imageBase64; 
+        $(modal).modal('show');
+    }
+
