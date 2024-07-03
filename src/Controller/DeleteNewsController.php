@@ -41,7 +41,7 @@ class  DeleteNewsController
         $this->addSuccessMessage('Notícia removida com sucesso');
         
         return new Response(302, [
-            'Location' => '/editar-noticia?id=' . $id
+            'Location' => '/'
         ]);
     }
 

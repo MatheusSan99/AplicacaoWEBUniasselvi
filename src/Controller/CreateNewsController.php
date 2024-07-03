@@ -45,7 +45,7 @@ class CreateNewsController
 
         $content = filter_var($requestBody['content']);
 
-        if ($image != null) {
+        if ($image != null && empty($image->getError())) {
             $imageContent = $image->getStream()->getContents();
 
             $imageContent = base64_encode($imageContent);   

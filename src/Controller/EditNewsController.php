@@ -73,7 +73,7 @@ class EditNewsController
 
         $image = $request->getUploadedFiles()['image'];
 
-        if ($image != null) {
+        if ($image != null && empty($image->getError())){
             $imageContent = $image->getStream()->getContents();
             $imageContent = base64_encode($imageContent);
         } else {
